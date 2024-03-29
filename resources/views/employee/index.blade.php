@@ -5,7 +5,7 @@
     <div class="card-header">Employee List</div>
     <div class="card-body">
         @can('create-employee')
-            <a href="{{ route('employees.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add New Employee</a>
+            <a href="{{ route('employee.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add New Employee</a>
         @endcan
         <table class="table table-striped table-bordered">
             <thead>
@@ -23,14 +23,14 @@
                         <td>{{ $employee->name }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>
-                            <form action="{{ route('employees.destroy', $employee->id) }}" method="post">
+                            <form action="{{ route('employee.destroy', $employee->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
 
-                                <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Show</a>
+                                <a href="{{ route('employee.show', $employee->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Show</a>
 
                                 @can('edit-employee')
-                                    <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
+                                    <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
                                 @endcan
 
                                 @can('delete-employee')
