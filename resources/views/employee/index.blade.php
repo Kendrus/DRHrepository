@@ -11,8 +11,18 @@
             <thead>
                 <tr>
                     <th scope="col">S#</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Marital Status</th>
+                    <th scope="col">Sex</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Language</th>
+                    <th scope="col">Skills</th>
+                    <th scope="col">Qualifications</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -20,8 +30,18 @@
                 @forelse ($employees as $employee)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->first_name }}</td>
+                        <td>{{ $employee->last_name }}</td>
                         <td>{{ $employee->email }}</td>
+                        <td>{{ $employee->phone }}</td>
+                        <td>{{ $employee->marital_status }}</td>
+                        <td>{{ $employee->sex }}</td>
+                        <td>{{ $employee->department }}</td>
+                        <td>{{ $employee->position }}</td>
+                        <td>{{ $employee->salary }}</td>
+                        <td>{{ $employee->language }}</td>
+                        <td>{{ $employee->skills }}</td>
+                        <td>{{ $employee->qualifications }}</td>
                         <td>
                             <form action="{{ route('employee.destroy', $employee->id) }}" method="post">
                                 @csrf
@@ -40,7 +60,7 @@
                         </td>
                     </tr>
                 @empty
-                    <td colspan="4">
+                    <td colspan="14">
                         <span class="text-danger">
                             <strong>No Employee Found!</strong>
                         </span>
