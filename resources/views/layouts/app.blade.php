@@ -92,7 +92,7 @@
                             </div>
                         @endif
 
-                        <h3 class="text-center mt-3 mb-3">Simple Laravel 10 User Roles and Permissions - <a href="https://www.allphptricks.com/">AllPHPTricks.com</a></h3>
+                        <h3 class="text-center mt-3 mb-3">Application Ressource Humaine - <a href="https://www.allphptricks.com/">AllPHPTricks.com</a></h3>
                         @yield('content')
                         
                         <div class="row justify-content-center text-center mt-3">

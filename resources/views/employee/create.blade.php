@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="row justify-content-center">
     <div class="col-md-8">
-
         <div class="card">
             <div class="card-header">
                 <div class="float-start">
@@ -125,4 +123,37 @@
                             <input type="text" class="form-control @error('language') is-invalid @enderror" id="language" name="language" value="{{ old('language') }}">
                             @error('language')
                                 <span class="text-danger">{{ $message }}</span>
-                            @
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="skills" class="col-md-4 col-form-label text-md-end text-start">Skills</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control @error('skills') is-invalid @enderror" id="skills" name="skills" value="{{ old('skills') }}">
+                            @error('skills')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="qualifications" class="col-md-4 col-form-label text-md-end text-start">Qualifications</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control @error('qualifications') is-invalid @enderror" id="qualifications" name="qualifications" value="{{ old('qualifications') }}">
+                            @error('qualifications')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 row">
+                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add Employee">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>    
+@endsection

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('language')->nullable();
             $table->string('skills')->nullable();
             $table->string('qualifications')->nullable();
+            $table->integer('leave_days')->default(0);
             $table->timestamps();
         });
     }

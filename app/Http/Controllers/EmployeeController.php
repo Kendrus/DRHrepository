@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use Illuminate\View\View;
@@ -15,11 +16,10 @@ class EmployeeController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth');
-       $this->middleware('permission:create-employee|edit-employee|delete-employee', ['only' => ['index','show']]);
-       $this->middleware('permission:create-employee', ['only' => ['create','store']]);
-       $this->middleware('permission:edit-employee', ['only' => ['edit','update']]);
-       $this->middleware('permission:delete-employee', ['only' => ['destroy']]);
+        $this->middleware('auth'); // Middleware d'authentification
+        $this->middleware('can:create-employee', ['only' => ['create', 'store']]); // Middleware de permission pour créer un employé
+        $this->middleware('can:edit-employee', ['only' => ['edit', 'update']]); // Middleware de permission pour modifier un employé
+        $this->middleware('can:delete-employee', ['only' => ['destroy']]); // Middleware de permission pour supprimer un employé
     }
 
     /**
@@ -28,7 +28,7 @@ class EmployeeController extends Controller
     public function index(): View
     {
         return view('employee.index', [
-            'employees' => Employee::latest()->paginate(3)
+            'employee' => Employee::latest('id')->paginate(10) // Paginer les employés
         ]);
     }
 
@@ -37,6 +37,7 @@ class EmployeeController extends Controller
      */
     public function create(): View
     {
+        // Retourner la vue avec le formulaire de création d'employé
         return view('employee.create');
     }
 
@@ -45,9 +46,11 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
-        Employee::create($request->all());
-        return redirect()->route('employees.index')
-                ->withSuccess('New employee is added successfully.');
+        // Créer un nouvel employé avec les données fournies dans la requête
+        Employee::create($request->validated());
+
+        // Rediriger avec un message de succès
+        return redirect()->route('employee.index')->withSuccess('New employee is added successfully.');
     }
 
     /**
@@ -55,9 +58,8 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee): View
     {
-        return view('employees.show', [
-            'employee' => $employee
-        ]);
+        // Retourner la vue avec les détails de l'employé spécifié
+        return view('employee.show', compact('employee'));
     }
 
     /**
@@ -65,9 +67,8 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee): View
     {
-        return view('employees.edit', [
-            'employee' => $employee
-        ]);
+        // Retourner la vue avec le formulaire pour modifier l'employé spécifié
+        return view('employee.edit', compact('employee'));
     }
 
     /**
@@ -75,9 +76,11 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, Employee $employee): RedirectResponse
     {
-        $employee->update($request->all());
-        return redirect()->back()
-                ->withSuccess('Employee is updated successfully.');
+        // Mettre à jour les informations de l'employé avec les données validées de la requête
+        $employee->update($request->validated());
+
+        // Rediriger avec un message de succès
+        return redirect()->route('employee.index')->withSuccess('Employee is updated successfully.');
     }
 
     /**
@@ -85,8 +88,10 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee): RedirectResponse
     {
+        // Supprimer l'employé spécifié
         $employee->delete();
-        return redirect()->route('employee.index')
-                ->withSuccess('Employee is deleted successfully.');
+
+        // Rediriger avec un message de succès
+        return redirect()->route('employee.index')->withSuccess('Employee is deleted successfully.');
     }
 }

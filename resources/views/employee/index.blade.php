@@ -21,13 +21,15 @@
                     <th scope="col">Position</th>
                     <th scope="col">Salary</th>
                     <th scope="col">Language</th>
+                    <th scope="col">leave_days</th>
+
                     <th scope="col">Skills</th>
                     <th scope="col">Qualifications</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($employees as $employee)
+                @forelse ($employee as $employee)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $employee->first_name }}</td>
@@ -40,8 +42,10 @@
                         <td>{{ $employee->position }}</td>
                         <td>{{ $employee->salary }}</td>
                         <td>{{ $employee->language }}</td>
+                        <td>{{ $employee->leave_days }}</td>
                         <td>{{ $employee->skills }}</td>
                         <td>{{ $employee->qualifications }}</td>
+                        
                         <td>
                             <form action="{{ route('employee.destroy', $employee->id) }}" method="post">
                                 @csrf
@@ -69,7 +73,7 @@
             </tbody>
         </table>
 
-        {{ $employees->links() }}
+        {{ $employee->links() }}
 
     </div>
 </div>

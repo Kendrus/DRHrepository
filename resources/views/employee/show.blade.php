@@ -85,6 +85,12 @@
                             {{ $employee->language }}
                         </div>
                     </div>
+                    <div class="row">
+                        <label for="language" class="col-md-4 col-form-label text-md-end text-start"><strong>leave_days:</strong></label>
+                        <div class="col-md-6" style="line-height: 35px;">
+                            {{ $employee->leave_days}}
+                        </div>
+                    </div>
 
                     <div class="row">
                         <label for="skills" class="col-md-4 col-form-label text-md-end text-start"><strong>Skills:</strong></label>
