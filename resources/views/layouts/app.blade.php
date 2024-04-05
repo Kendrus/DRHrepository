@@ -55,7 +55,7 @@
                             @canany(['create-user', 'edit-user', 'delete-user'])
                                 <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                             @endcanany
-                            @canany(['create-product', 'edit-product', 'delete-product'])
+                            @canany(['create-employee', 'edit-employee', 'delete-product'])
                                 <li><a class="nav-link" href="{{ route('employee.index') }}">Manage Products</a></li>
                             @endcanany
                             <li class="nav-item dropdown">

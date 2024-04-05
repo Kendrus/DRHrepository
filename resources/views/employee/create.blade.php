@@ -9,12 +9,12 @@
                     Add New Employee
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('employee.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="" class="btn btn-primary btn-sm">&larr; Back</a>
                 </div>
             </div>
             <div class="card-body">
                 <form action="{{ route('employee.store') }}" method="post">
-                    @csrf
+                    @CSRF
 
                     <div class="mb-3 row">
                         <label for="first_name" class="col-md-4 col-form-label text-md-end text-start">First Name</label>

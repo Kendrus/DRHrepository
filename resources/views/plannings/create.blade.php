@@ -4,6 +4,7 @@
 <div class="container">
     <h2>Créer un nouveau planning</h2>
     <!-- Formulaire de création du planning -->
+    <!-- Vous pouvez personnaliser la mise en page en fonction de vos besoins -->
     <form action="{{ route('plannings.store') }}" method="POST">
         @csrf
         <div class="form-group">

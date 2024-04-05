@@ -27,9 +27,12 @@ class EmployeeController extends Controller
      */
     public function index(): View
     {
-        return view('employee.index', [
-            'employee' => Employee::latest('id')->paginate(10) // Paginer les employés
-        ]);
+        $employee= Employee::paginate(3);
+        // return view('employee.index', [
+           // 'employee' => Employee::latest('id')->paginate(10) // Paginer les employés
+       //  ]);
+       return view('employee.index',compact('employee'));
+        
     }
 
     /**
@@ -47,7 +50,9 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
         // Créer un nouvel employé avec les données fournies dans la requête
-        Employee::create($request->validated());
+       
+      // die($request->all());
+       Employee::create($request->validated());
 
         // Rediriger avec un message de succès
         return redirect()->route('employee.index')->withSuccess('New employee is added successfully.');

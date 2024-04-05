@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\employeeController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CongeController;
 use App\Http\Controllers\ContratController;
 
@@ -26,6 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+//Route::post('/employee', [employeeController::class, 'store'])->name('store');
 
 Route::resources([
     'roles' => RoleController::class,
@@ -34,3 +35,7 @@ Route::resources([
     'conge' => CongeController::class,
     'contrats' => ContratController::class
 ]);
+
+Route::get('/employee.index', [EmployeeController::class, 'index'])->name('employee.index');
+Route::get('/employee', [EmployeeController::class, 'create'])->name('employee.create');
+Route::post('/employee/store', [EmployeeController::class, 'store'])->name('employee.store');
