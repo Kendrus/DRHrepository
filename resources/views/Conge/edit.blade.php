@@ -2,10 +2,16 @@
 
 @section('content')
     <div class="container">
-        <h1>Modifier le Congé</h1>
-        <form action="{{ route('conges.update', $conge->id) }}" method="post">
+        <h1>Modifier la demande de Congé</h1>
+        <form action="{{ route('conge.update', $conge->id) }}" method="post">
             @csrf
             @method('PUT')
+            <div class="form-group">
+                <label for="user_id">Employé :</label>
+                <select name="user_id" id="user_id" class="form-control" disabled>
+                    <option value="{{ $conge->user_id }}">{{ $conge->user->name }}</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="type">Type de congé :</label>
                 <input type="text" name="type" id="type" class="form-control" value="{{ $conge->type }}">

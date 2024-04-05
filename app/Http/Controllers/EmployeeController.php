@@ -27,11 +27,11 @@ class EmployeeController extends Controller
      */
     public function index(): View
     {
-        $employee= Employee::paginate(3);
+        $employees= Employee::paginate(4);
         // return view('employee.index', [
            // 'employee' => Employee::latest('id')->paginate(10) // Paginer les employés
        //  ]);
-       return view('employee.index',compact('employee'));
+       return view('employee.index',compact('employees'));
         
     }
 
@@ -40,8 +40,10 @@ class EmployeeController extends Controller
      */
     public function create(): View
     {
+        
+        $employees= Employee::all();
         // Retourner la vue avec le formulaire de création d'employé
-        return view('employee.create');
+        return view('employee.create',compact('employees'));
     }
 
     /**

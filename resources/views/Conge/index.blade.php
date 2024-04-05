@@ -8,6 +8,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Employé</th>
                         <th>Type</th>
                         <th>Date de début</th>
                         <th>Date de fin</th>
@@ -18,6 +19,7 @@
                 <tbody>
                     @foreach ($conges as $conge)
                         <tr>
+                            <td>{{ $conge->user->name }}</td>
                             <td>{{ $conge->type }}</td>
                             <td>{{ $conge->date_debut }}</td>
                             <td>{{ $conge->date_fin }}</td>
@@ -39,3 +41,4 @@
         @endif
     </div>
 @endsection
+    

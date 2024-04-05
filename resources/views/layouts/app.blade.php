@@ -58,6 +58,9 @@
                             @canany(['create-employee', 'edit-employee', 'delete-product'])
                                 <li><a class="nav-link" href="{{ route('employee.index') }}">Manage Products</a></li>
                             @endcanany
+                            @canany(['create-conge', 'edit-conge', 'delete-conge'])
+                                <li><a class="nav-link" href="{{ route('conge.index') }}">Conge</a></li>
+                            @endcanany
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

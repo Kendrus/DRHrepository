@@ -6,6 +6,14 @@
         <form action="{{ route('conge.store') }}" method="post">
             @csrf
             <div class="form-group">
+                <label for="user_id">Employé :</label>
+                <select name="user_id" id="user_id" class="form-control">
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->first_name }} </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="type">Type de congé :</label>
                 <input type="text" name="type" id="type" class="form-control">
             </div>

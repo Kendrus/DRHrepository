@@ -39,3 +39,9 @@ Route::resources([
 Route::get('/employee.index', [EmployeeController::class, 'index'])->name('employee.index');
 Route::get('/employee', [EmployeeController::class, 'create'])->name('employee.create');
 Route::post('/employee/store', [EmployeeController::class, 'store'])->name('employee.store');
+
+Route::delete('/conges/{conge}', [CongeController::class, 'destroy'])->name('conges.destroy');
+// Route pour afficher le formulaire de modification d'une demande de congé spécifique
+Route::get('/conges/{conge}/edit', [CongeController::class, 'edit'])->name('conge.edit');
+Route::put('/conges/{conge}', [CongeController::class, 'update'])->name('conge.update');
+    

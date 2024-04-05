@@ -22,14 +22,13 @@
                     <th scope="col">Salary</th>
                     <th scope="col">Language</th>
                     <th scope="col">leave_days</th>
-
                     <th scope="col">Skills</th>
                     <th scope="col">Qualifications</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($employee as $employee)
+                @forelse ($employees as $employee)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $employee->first_name }}</td>
@@ -64,16 +63,18 @@
                         </td>
                     </tr>
                 @empty
-                    <td colspan="14">
-                        <span class="text-danger">
-                            <strong>No Employee Found!</strong>
-                        </span>
-                    </td>
+                    <tr>
+                        <td colspan="15">
+                            <span class="text-danger">
+                                <strong>No Employee Found!</strong>
+                            </span>
+                        </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>
 
-        {{ $employee->links() }}
+        {{ $employees->links('pagination::bootstrap-4') }}
 
     </div>
 </div>
