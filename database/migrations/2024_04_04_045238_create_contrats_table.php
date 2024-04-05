@@ -1,26 +1,27 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCongesTable extends Migration
+class CreateContratsTable extends Migration
 {
     public function up()
     {
-        Schema::create('conges', function (Blueprint $table) {
+        Schema::create('contrats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('employee_id');
             $table->string('type');
             $table->date('date_debut');
             $table->date('date_fin');
-            $table->string('statut')->default('En attente');
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('conges');
+        Schema::dropIfExists('contrats');
     }
 };

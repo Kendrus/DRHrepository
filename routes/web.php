@@ -6,6 +6,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\employeeController;
 use App\Http\Controllers\CongeController;
+use App\Http\Controllers\ContratController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,5 @@ Route::resources([
     'users' => UserController::class,
     'employee' => employeeController::class,
     'conge' => CongeController::class,
+    'contrats' => ContratController::class
 ]);

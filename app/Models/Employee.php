@@ -24,4 +24,9 @@ class Employee extends Model
         'skills',
         'qualifications',
     ];
+
+    public function contrats()
+    {
+        return $this->hasMany(Contrat::class);
+    }
 }
