@@ -2,36 +2,78 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contrat;
-use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\Contrat;
 
 class ContratController extends Controller
 {
-    public function create(Employee $employee)
+    public function index()
     {
-        return view('contrats.create', compact('employee'));
-        $employees = Employee::all();
-    return view('contrats.create', compact('employees'));
+        // Récupérer tous les contrats
+        $contrats = Contrat::all();
+        return view('contrat.index', compact('contrats'));
     }
 
-    public function store(Request $request, Employee $employee)
+    public function create()
     {
+        return view('contrat.create');
+    }
+
+    public function store(Request $request)
+    {
+        // Valider les données du formulaire
         $request->validate([
-            'type' => 'required|string',
+            'type' => 'required|string|in:CDI,CDD,Prestation de service',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
         ]);
 
-        $employee->contrats()->create($request->all());
+        // Enregistrer le contrat dans la base de données
+        Contrat::create([
+            'type' => $request->type,
+            'date_debut' => $request->date_debut,
+            'date_fin' => $request->date_fin,
+        ]);
 
-        return redirect()->route('employee.show', $employee)->with('success', 'Contrat créé avec succès.');
+        // Rediriger avec un message de succès
+        return redirect()->route('contrat.index')->with('success', 'Contrat ajouté avec succès.');
     }
 
-    public function index(Employee $employee)
+    public function edit($id)
     {
-        $contrats = $employee->contrats;
-        return view('contrats.index', compact('employee', 'contrats'));
+        $contrat = Contrat::findOrFail($id);
+        return view('contrat.edit', compact('contrat'));
     }
-   
+
+    public function update(Request $request, $id)
+    {
+        // Valider les données du formulaire
+        $request->validate([
+            'type' => 'required|string|in:CDI,CDD,Prestation de service',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+        ]);
+
+        // Récupérer le contrat à mettre à jour
+        $contrat = Contrat::findOrFail($id);
+
+        // Mettre à jour les champs du contrat avec les données du formulaire
+        $contrat->update([
+            'type' => $request->type,
+            'date_debut' => $request->date_debut,
+            'date_fin' => $request->date_fin,
+        ]);
+
+        // Rediriger avec un message de succès
+        return redirect()->route('contrat.index')->with('success', 'Contrat mis à jour avec succès.');
+    }
+
+    public function destroy($id)
+    {
+        // Supprimer le contrat
+        Contrat::findOrFail($id)->delete();
+
+        // Rediriger avec un message de succès
+        return redirect()->route('contrat.index')->with('success', 'Contrat supprimé avec succès.');
+    }
 }

@@ -2,12 +2,13 @@
 
 @section('content')
     <div class="container">
-        <h1>Liste des Contrats de {{ $employee->nom }} {{ $employee->prenom }}</h1>
-        <a href="{{ route('contrats.create', $employee) }}" class="btn btn-primary mb-3">Ajouter un Contrat</a>
+        <h1>Liste des Contrats</h1>
+        <a href="{{ route('contrat.create') }}" class="btn btn-primary mb-3">Ajouter un Contrat</a>
         @if ($contrats->count() > 0)
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Employé</th>
                         <th>Type</th>
                         <th>Date de début</th>
                         <th>Date de fin</th>
@@ -17,19 +18,24 @@
                 <tbody>
                     @foreach ($contrats as $contrat)
                         <tr>
+                            <td>{{ $contrat->user->name }}</td>
                             <td>{{ $contrat->type }}</td>
                             <td>{{ $contrat->date_debut }}</td>
                             <td>{{ $contrat->date_fin }}</td>
                             <td>
-                                <a href="{{ route('contrats.edit', ['employee' => $employee, 'contrats' => $contrat]) }}" class="btn btn-sm btn-primary">Modifier</a>
-                                <!-- Ajoutez le lien vers la page de détails du contrat -->
+                                <a href="{{ route('contrat.edit', $contrat->id) }}" class="btn btn-sm btn-primary">Modifier</a>
+                                <form action="{{ route('contrat.destroy', $contrat->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contrat ?')">Supprimer</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         @else
-            <p>Aucun contrat n'a été ajouté pour cet employé.</p>
+            <p>Aucun contrat ajouté pour le moment.</p>
         @endif
     </div>
 @endsection

@@ -4,22 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContratsTable extends Migration
+class CreateAbsencesTable extends Migration
 {
     public function up()
     {
-        Schema::create('contrats', function (Blueprint $table) {
+        Schema::create('absences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('type');
-            $table->date('date_debut');
-            $table->date('date_fin');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('contrats');
+        Schema::dropIfExists('absences');
     }
 }

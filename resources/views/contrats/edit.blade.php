@@ -2,43 +2,33 @@
 
 @section('content')
     <div class="container">
-        <h1>Modifier le Contrat de {{ $employee->nom }} {{ $employee->prenom }}</h1>
-
-        <form method="POST" action="{{ route('contrat.update', ['employee' => $employee, 'contrat' => $contrat]) }}">
+        <h1>Modifier Contrat</h1>
+        <form action="{{ route('contrat.update', $contrat->id) }}" method="post">
             @csrf
             @method('PUT')
-
+            <div class="form-group">
+                <label for="user_id">Employé :</label>
+                <select name="user_id" id="user_id" class="form-control" disabled>
+                    <option value="{{ $contrat->user_id }}">{{ $contrat->user->name }}</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="type">Type de Contrat :</label>
-                <input type="text" name="type" id="type" class="form-control @error('type') is-invalid @enderror" value="{{ $contrat->type }}" required>
-                @error('type')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <select name="type" id="type" class="form-control">
+                    <option value="CDI" {{ $contrat->type == 'CDI' ? 'selected' : '' }}>CDI</option>
+                    <option value="CDD" {{ $contrat->type == 'CDD' ? 'selected' : '' }}>CDD</option>
+                    <option value="Prestation de service" {{ $contrat->type == 'Prestation de service' ? 'selected' : '' }}>Prestation de service</option>
+                </select>
             </div>
-
             <div class="form-group">
                 <label for="date_debut">Date de Début :</label>
-                <input type="date" name="date_debut" id="date_debut" class="form-control @error('date_debut') is-invalid @enderror" value="{{ $contrat->date_debut }}" required>
-                @error('date_debut')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <input type="date" name="date_debut" id="date_debut" class="form-control" value="{{ $contrat->date_debut }}">
             </div>
-
             <div class="form-group">
                 <label for="date_fin">Date de Fin :</label>
-                <input type="date" name="date_fin" id="date_fin" class="form-control @error('date_fin') is-invalid @enderror" value="{{ $contrat->date_fin }}" required>
-                @error('date_fin')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <input type="date" name="date_fin" id="date_fin" class="form-control" value="{{ $contrat->date_fin }}">
             </div>
-
-            <button type="submit" class="btn btn-primary">Enregistrer les Modifications</button>
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         </form>
     </div>
 @endsection

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CongeController;
 use App\Http\Controllers\ContratController;
+use App\Http\Controllers\AbsenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,8 @@ Route::resources([
     'users' => UserController::class,
     'employee' => employeeController::class,
     'conge' => CongeController::class,
-    'contrats' => ContratController::class
+    'contrats' => ContratController::class,
+    'absences' => AbsenceController::class
 ]);
 
 Route::get('/employee.index', [EmployeeController::class, 'index'])->name('employee.index');
@@ -44,4 +46,8 @@ Route::delete('/conges/{conge}', [CongeController::class, 'destroy'])->name('con
 // Route pour afficher le formulaire de modification d'une demande de congé spécifique
 Route::get('/conges/{conge}/edit', [CongeController::class, 'edit'])->name('conge.edit');
 Route::put('/conges/{conge}', [CongeController::class, 'update'])->name('conge.update');
-    
+
+Route::get('/absences/{absence}/edit', [AbsenceController::class, 'edit'])->name('absences.edit');
+Route::put('/absences/{absence}', [AbsenceController::class, 'update'])->name('absence.update');
+Route::delete('/absences/{absence}', [AbsenceController::class, 'destroy'])->name('absences.destroy');
+
